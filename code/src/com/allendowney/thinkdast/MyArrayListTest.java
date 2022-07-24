@@ -239,7 +239,7 @@ public class MyArrayListTest {
 	 * Test method for {@link MyArrayList#set(int, Object)}.
 	 */
 	@Test
-	public void testSet() {
+	public void testSet() throws Exception {
 		Integer val = mylist.set(1, 5);
 		assertThat(val, is(new Integer(2)));
 

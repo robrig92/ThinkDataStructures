@@ -71,8 +71,23 @@ public class MyTreeMap<K, V> implements Map<K, V> {
 		@SuppressWarnings("unchecked")
 		Comparable<? super K> k = (Comparable<? super K>) target;
 
-		// TODO: FILL THIS IN!
-		return null;
+		return search(k, root);
+	}
+
+	private Node search(Comparable<? super K> k, Node node) {
+		if (node == null) {
+			return null;
+		}
+
+		if (k.equals(node.key)) {
+			return node;
+		}
+
+		if (k.compareTo(node.key) > 0) {
+			return search(k, node.right);
+		} else {
+			return search(k, node.left);
+		}
 	}
 
 	/**
@@ -95,7 +110,22 @@ public class MyTreeMap<K, V> implements Map<K, V> {
 	}
 
 	private boolean containsValueHelper(Node node, Object target) {
-		// TODO: FILL THIS IN!
+		if (node == null) {
+			return false;
+		}
+
+		if (node.value.equals(target)) {
+			return true;
+		}
+
+		if (node.left != null) {
+			return containsValueHelper(node.left, target);
+		}
+
+		if (node.right != null) {
+			return containsValueHelper(node.right, target);
+		}
+
 		return false;
 	}
 
@@ -121,8 +151,20 @@ public class MyTreeMap<K, V> implements Map<K, V> {
 	@Override
 	public Set<K> keySet() {
 		Set<K> set = new LinkedHashSet<K>();
-		// TODO: FILL THIS IN!
+
+		keySetHelper(set, root);
+
 		return set;
+	}
+
+	public void keySetHelper(Set<K> set, Node node) {
+		if (node.left != null) {
+			keySetHelper(set, node.left);
+		}
+		set.add(node.key);
+		if (node.right != null) {
+			keySetHelper(set, node.right);
+		}
 	}
 
 	@Override
@@ -139,7 +181,30 @@ public class MyTreeMap<K, V> implements Map<K, V> {
 	}
 
 	private V putHelper(Node node, K key, V value) {
-		// TODO: FILL THIS IN!
+		if (node.key.equals(key)) {
+			V oldValue = node.value;
+			node.value = value;
+			return oldValue;
+		}
+
+		Comparable<K> k = (Comparable<K>) key;
+		if (k.compareTo(node.key) > 0) {
+			if (node.right == null) {
+				node.right = makeNode(key, value);
+				size++;
+				return null;
+			} else {
+				putHelper(node.right, key, value);
+			}
+		} else {
+			if (node.left == null) {
+				size++;
+				node.left = makeNode(key, value);
+				return null;
+			} else {
+				putHelper(node.left, key, value);
+			}
+		}
 		return null;
 	}
 

@@ -3,6 +3,7 @@
  */
 package com.allendowney.thinkdast;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,15 @@ public class MyHashMap<K, V> extends MyBetterMap<K, V> implements Map<K, V> {
 	 *
 	 */
 	protected void rehash() {
-		// TODO: FILL THIS IN!
+		Map entries = new HashMap();
+		for (MyLinearMap currentMap : maps) {
+			for (Object current: currentMap.getEntries()) {
+				Entry entry = (Entry<K, V>) current;
+				entries.put(entry.getKey(), entry.getValue());
+			}
+		}
+		makeMaps(maps.size() * 2);
+		putAll(entries);
 	}
 
 	/**

@@ -15,9 +15,9 @@ public class ProfileListAdd {
 	 */
 	public static void main(String[] args) {
 		//profileArrayListAddEnd();
-		//profileArrayListAddBeginning();
+		profileArrayListAddBeginning();
 		//profileLinkedListAddBeginning();
-		profileLinkedListAddEnd();
+//		profileLinkedListAddEnd();
 	}
 
 	/**

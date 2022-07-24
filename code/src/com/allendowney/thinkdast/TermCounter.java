@@ -36,8 +36,7 @@ public class TermCounter {
 	 * @return
 	 */
 	public int size() {
-		// TODO: FILL THIS IN!
-		return 0;
+		return (int) map.entrySet().stream().map(Map.Entry::getValue).reduce((accum, value) -> { return accum + value; }).orElse(0);
 	}
 
 	/**
