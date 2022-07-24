@@ -123,6 +123,8 @@ public class JedisIndex {
 		TermCounter counter = new TermCounter(url);
 		counter.processElements(paragraphs);
 
+		jedis.del(termCounterKey(url));
+
 		Set<String> terms = counter.keySet();
 		for (String term : terms) {
 			add(term, counter);
