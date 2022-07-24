@@ -15,3 +15,5 @@ hs_err_pid*
 code/code.iml
 solutions/solutions.iml
 
+code/src/resources/redis_url.txt
+.nvimlog
